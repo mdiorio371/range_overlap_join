@@ -32,12 +32,19 @@ left_join_overlaps <-
         
 
         
-        y_joining <- 
+         y_joining <- 
             y %>%
-            dplyr::slice(y_overlaps)
+            dplyr::slice(y_overlaps) %>% 
+            mutate(join_index = x_overlaps)
+    
         
         x_joined <- 
-            left_join(x, y_joining, by = join_column)
+            x %>%
+            mutate(
+                join_index = row_number()
+                    ) %>%
+            left_join(., y_joining, by = "join_index")
+            
             
         return(x_joined)
         
