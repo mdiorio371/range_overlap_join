@@ -30,21 +30,17 @@ left_join_overlaps <-
         y_overlaps <- 
             subjectHits(overlap_table)
         
-
-        
          y_joining <- 
             y %>%
             dplyr::slice(y_overlaps) %>% 
             mutate(join_index = x_overlaps)
-    
         
         x_joined <- 
             x %>%
             mutate(
                 join_index = row_number()
                     ) %>%
-            left_join(., y_joining, by = "join_index")
-            
+            left_join(., y_joining, by = "join_index") 
             
         return(x_joined)
         
