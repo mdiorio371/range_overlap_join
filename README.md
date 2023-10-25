@@ -2,11 +2,12 @@
 Join two tables in R by their overlapping ranges
 
 
-library(tidyverse)
-library(IRanges)
+library(tidyverse);
+library(IRanges);
 
 left_join_overlaps <- 
     function(x,y, join_column){
+	
         x_range <- 
             IRanges(
                 start = 
@@ -14,6 +15,7 @@ left_join_overlaps <-
                 end = 
                     pull(x, end)
             )
+			
         y_range <- 
             IRanges(
                 start = 
